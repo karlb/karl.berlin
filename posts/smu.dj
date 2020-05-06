@@ -4,9 +4,9 @@
 
 I wanted to get my hands dirty and improve a [suckless](https://suckless.org/) related program. So I had a look at the [project ideas page](https://suckless.org/project_ideas/) and picked out something simple:
 
-> Improve the Markdown parser used by the suckless wiki called "smu" to conform more to Markdown. for example for nested codeblocks. Difficulty: trivial-medium.  
-> Specs: http://daringfireball.net/projects/markdown/syntax.text and http://commonmark.org/.  
-> smu: https://github.com/Gottox/smu  
+> Improve the Markdown parser used by the suckless wiki called "smu" to conform more to Markdown. for example for nested codeblocks. Difficulty: trivial-medium.\
+> Specs: http://daringfireball.net/projects/markdown/syntax.text and http://commonmark.org/.\
+> smu: https://github.com/Gottox/smu
 
 ## First Impressions
 
@@ -54,7 +54,7 @@ Markdown is not something that falls out of a beautiful mathematical model, rath
 
 As mentioned above, I didn't write C for a long time. I also was not sure how all Markdown should be interpreted in detail. So to prevent me from breaking everything, I needed some way to spot regressions or other bugs. When looking for Markdown test cases, I found [mdtest](https://github.com/michelf/mdtest/) and took a set of basis tests from it that mostly worked with smu. Then I looked through the remaining differences and tried to understand why smu delivered different results. That way, the tests did not only provide some safety while hacking on smu, but also showed me where it differed from other markdown implementations.
 
-To turn the *(input, expected output)* pairs into automated test cases, I committed both to git and added a make target that regenerates the output and runs `git diff` on the test directory. When the diff shows no output, the tests have passed! This will give more false positives than mdtest's algorithm that accounts for insignificant white space, but it is much simpler.
+To turn the _(input, expected output)_ pairs into automated test cases, I committed both to git and added a make target that regenerates the output and runs `git diff` on the test directory. When the diff shows no output, the tests have passed! This will give more false positives than mdtest's algorithm that accounts for insignificant white space, but it is much simpler.
 
 ### CommonMark Compatibility
 
@@ -68,13 +68,6 @@ One other conceptual difference I introduced was a different escaping rules. Ori
 2. Some code parts containing backslashes lost their backslashes unless you escape them (bad for copy/paste).
 
 To remedy the first problem, I looked up the [CommonMark escaping rules](https://spec.commonmark.org/0.29/#backslash-escapes) and added all characters from the CommomMark list to smu's list of escaped characters. Inside code spans, `` \` `` was the only escape needed to be allowed, since it would mean the end of a code span without escape and all other characters have no special meaning inside code spans/blocks. But this was an ugly special case in the code and would also lead to silently broken code samples when you add code that does contain a literal `` \` ``. How does CommonMark deal with this? The rules for code spans and code blocks allow an unlimited amount of different start and end markers, so markers can be chosen that are not present in the code itself. I chose a subset of these rules that could be expressed with smu's existing matching declarations, so that you can write ``` `` ` `` ``` if you want a code span that contains a single backtick (The pair of single white spaces is ignored). When first reading the CommonMark specs, I felt that these rules were strange and arbitrary, but after trying to find simpler alternative, I started to appreciate the spec more and more, even though I still consider parts of it to allow an unnecessarily amount of different syntaxes.
-
-<!--
-### Different approaches
-
-* used regex
-* more comments
--->
 
 ## Conclusion
 
