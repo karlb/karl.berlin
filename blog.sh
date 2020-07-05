@@ -49,7 +49,7 @@ atom_xml() {
 EOF
 
 	while read -r f title created updated; do
-		if [ "$created" = "draft" ]; then return; fi
+		if [ "$created" = "draft" ]; then continue; fi
 
 		day=$(echo "$created" | sed 's/T.*//')
 		content=$($MARKDOWN "$f" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g')
