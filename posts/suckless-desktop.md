@@ -46,6 +46,8 @@ I want to be able to change the volume and screen brightness with the media keys
 
 ## Problems
 
+### autolock
+
 I didn't find an autolock setup that worked as well as I would like. My goal would be:
 * Lock screen when sleeping or after X minutes
 * Turn screen off when locking
@@ -53,6 +55,13 @@ I didn't find an autolock setup that worked as well as I would like. My goal wou
 
 I could not get the last point working reliably for me with xautolock or [xidlehook](https://github.com/jD91mZM2/xidlehook) ([bug report](https://github.com/jD91mZM2/xidlehook/issues/23)). I stopped using autolock and just manually lock my screen.
 
+### Versioning My Setup
+
+As noted above, the suckless tools don't use config files, so they I can't put their configuration in version control as I am used to.
+
+### Lack of Good Predefined Setup
+
+While the programs work well and reliably, using them is not just matter of installing and running them. Getting to a usable setup involves quite some time of choosing the right set of programs and configuration that works for you. I would have liked a known-good setup as a starting point.
 
 <!--
 ## Other simple tools
