@@ -9,7 +9,7 @@ watch:
 	ls -d .git/* * posts/* pages/* | entr -cd make ;\
 	done
 
-# deploy:
-# 	rsync -avz build/ -e ssh www.wikdict.com:hosts/static.karl.berlin/blog
+deploy:
+	rsync -avz --progress -e ssh build/ www.karl.berlin:hosts/karl.berlin
 
 .PHONY: all clean watch deploy
