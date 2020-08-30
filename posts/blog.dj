@@ -59,6 +59,7 @@ Using such a small amount of CSS also removed the need for any CSS preprocessors
 You can find the [code of the resulting script](https://github.com/karlb/karl.berlin/blob/master/blog.sh) on github. The blog you are currently viewing is part of the same repository and serves as example content.
 
 To make the script work as intended, you should adhere to the following rules:
+
 - Use git and don't edit history after publishing. This is required for the automatic timestamp generation.
 - All posts and the `index.md` have a title using the `# ` syntax. This title is used for the HTMl title tag and for the post titles in the article listing and RSS feed.
 - `header.html` contains an absolute link to your `atom.xml`, including a hostname you control. This is necessary to build a correct atom feed.
