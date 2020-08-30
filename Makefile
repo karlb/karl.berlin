@@ -6,7 +6,7 @@ clean:
 
 watch:
 	while true; do \
-	ls -d .git/* * posts/* pages/* | entr -cd make ;\
+	ls -d .git/* * posts/* pages/* header.html | entr -cd make ;\
 	done
 
 deploy:
