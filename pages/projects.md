@@ -21,7 +21,6 @@
 
 ## Experiments
 <ul>
-    <li><a href="http://static.karl.berlin/simplicity/">Exercises in Simplicity</a>: Getting a feel for where extremely simple software works</li>
     <li><a href="https://github.com/karlb/zerosum">TrackMyOwe.com</a>: Track and settle owes online</li>
     <li><a href="http://jsfiddle.net/karlb/PxfrJ/">TransDict</a>, a translation dictionary based on Wiktionary</li>
 </ul>
