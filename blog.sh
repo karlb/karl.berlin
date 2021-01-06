@@ -5,7 +5,7 @@ IFS='	'
 
 # Create tab separated file with filename, title, creation date, last update
 index_tsv() {
-	for f in "$1"/*
+	for f in "$1"/*.md
 	do
 		created=$(git log --pretty='format:%aI' "$f" 2> /dev/null | tail -1)
 		updated=$(git log --pretty='format:%aI' "$f" 2> /dev/null | head -1)
@@ -87,7 +87,7 @@ write_page() {
 		> "$target"
 }
 
-rm -f build/*
+rm -fr build && mkdir build
 
 # Blog posts
 index_tsv posts | sort -rt "	" -k 3 > build/posts.tsv
@@ -103,3 +103,6 @@ index_tsv pages > build/pages.tsv
 while read -r f title created updated; do
 	write_page "$f" "$title" "$created" "$updated"
 done < build/pages.tsv
+
+# Static files
+cp -r posts/*/ build
