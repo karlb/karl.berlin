@@ -18,6 +18,7 @@ The [simple blog engine](https://github.com/karlb/karl.berlin) I wrote recently 
 I chose to use the existing code as a starting point and port that to Tcl line by line, so the latter point is the more serious one. Even more so, since I'm new to Tcl but have used shell scripting before.
 
 ### Rewriting Line by Line
+
 Rewriting the first few lines already made one thing obvious: using Tcl in to call external commands is very easy and works mostly like it does in the shell. The code I use to get the time of the first git commit hardly changed:
 
 ```
@@ -35,6 +36,7 @@ b="bacon spam"
 When you call `myfunc $a $b` in sh, you will pass three parameters to myfunc, because b gets split up at the space. In contrast, Tcl will always pass two parameters, irregardless of the content of those two variables. There are ways to avoid this in sh (and even more ways in bash), but I still run into edge cases from time to time and find Tcl's approach more pleasant and sane.
 
 Other changes compared to the shell version were
+
 * Use of a nested list instead of writing temporary data to a TSV, because Tcl made it easier to deal with the nested data
 * Some syntactic sugar like `lassign` and explicitly named function parameters
 * Replace some `sed` usages with built-in string functions
@@ -42,6 +44,7 @@ Other changes compared to the shell version were
 This led me to my first working Tcl version of the blog engine ([blog.1.tcl](tcl/blog.1.tcl), compare with [blog.sh](tcl/blog.sh)) which resulted in the same output as my original version, except for some insignificant whitespace differences.
 
 ### Cleaning Things Up
+
 The next step was to go through the code a second time and look for opportunities to simplify and clean up parts that felt out of place in a Tcl program. Calls to `sed` can be replaced by using Tcl's regex support:
 
 ```
@@ -75,6 +78,7 @@ The simple access to proper data structures also made me replace two calls to gi
 The new code is a bit longer, but less redundant and clearly displays the relationship between `created` and `updated`.
 
 ### Result
+
 Together, these changes resulted in the final version of my blog script ([blog.tcl](tcl/blog.tcl)). Let's compare the size and run times as a last discipline.
 
 ```
