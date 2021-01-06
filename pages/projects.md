@@ -7,6 +7,7 @@
     <li><a href="http://land-rush.appspot.com/">Land Rush</a>: Multi-player auction game</li>
     <li><a href="http://karlb.github.io/nuclearchess/">Nuclear Chess</a>: Chess variant with AI, playable in the browser</li>
     <li><a href="https://github.com/karlb/doagain">Do Again List</a>: An self sorting list of things you want to do somewhat regularly</li>
+    <li><a href="https://github.com/karlb/karl.berlin">blog.sh</a>: The minimalistic blog engine running this site</li>
 </ul>
 
 ## Old Projects
@@ -21,6 +22,7 @@
 
 ## Experiments
 <ul>
+    <li><a href="https://www.iprefer.to">iprefer.to</a>: Rating site that uses comparisons instead of star ratings</li>
     <li><a href="https://github.com/karlb/zerosum">TrackMyOwe.com</a>: Track and settle owes online</li>
     <li><a href="http://jsfiddle.net/karlb/PxfrJ/">TransDict</a>, a translation dictionary based on Wiktionary</li>
 </ul>
