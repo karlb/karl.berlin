@@ -22,18 +22,19 @@ I want to be able to change the volume and screen brightness with the media keys
 
 ```
 # Brightness +
-"lux -a 70"
+"lux -a 100"
     XF86MonBrightnessUp 
 
 # Brightness -
-"lux -s 70"
+"lux -s 100"
     XF86MonBrightnessDown 
 
+
 # Increase volume
-"pactl set-sink-volume @DEFAULT_SINK@ +5000"
+"pactl set-sink-volume @DEFAULT_SINK@ $(pacmd list-sinks | awk '/volume:/ {print int($3 * 1.2); exit}'); pacmd list-sinks | awk '/volume:/ {print $5; exit}' | dzen2 -p 2"
    XF86AudioRaiseVolume
 # Decrease volume
-"pactl set-sink-volume @DEFAULT_SINK@ -5000"
+"pactl set-sink-volume @DEFAULT_SINK@ $(pacmd list-sinks | awk '/volume:/ {print int($3 * 0.8); exit}'); pacmd list-sinks | awk '/volume:/ {print $5; exit}' | dzen2 -p 2"
    XF86AudioLowerVolume
 # Mute volume
 "pactl set-sink-mute @DEFAULT_SINK@ toggle"
@@ -42,6 +43,20 @@ I want to be able to change the volume and screen brightness with the media keys
 # Shift + super + L locks screen and turns display off
 "slock & (sleep 1 && xset dpms force off)"
    Shift + Mod4 + l
+
+# turn screen off
+"sleep 1.0 && xset dpms force off"
+   shift + mod4 + s
+
+"systemctl suspend"
+   shift + mod4 + z
+
+"autorandr -c"
+   control+shift + a
+
+# toggle redshift
+"killall redshift || redshift -l 52.5200:13.4050 -b 0.7:0.3 &"
+   shift + mod4 + r
 ```
 
 ## Problems
