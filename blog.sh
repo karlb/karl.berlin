@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
 MARKDOWN=smu
+GEMINI() { <"$1" perl -0pe 's/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g;s/<!--.*-->//gs' | md2gemini --links paragraph; }
 IFS='	'
 
 # Create tab separated file with filename, title, creation date, last update
@@ -85,6 +86,24 @@ write_page() {
 		cat header.html - |\
 		sed "s/{{TITLE}}/$title/" \
 		> "$target"
+
+	GEMINI "$filename" | \
+		sed "$ s/$/\\n\\n$dates_text/" \
+		> "$(echo "$target" | sed s/.html/.gmi/)"
+}
+
+
+index_gmi() {
+	# Intro text
+	GEMINI index.md
+
+	# Posts
+	while read -r f title created updated; do
+		if [ "$created" = "draft" ] && [ "$2" = "hide-drafts" ]; then continue; fi
+		link=$(echo "$f" | sed -E 's|.*/(.*).md|\1.gmi|')
+		created=$(echo "$created" | sed -E 's/T.*//')
+	 	echo "=> $link $created - $title"
+	done < "$1"
 }
 
 rm -fr build && mkdir build
@@ -93,6 +112,7 @@ rm -fr build && mkdir build
 index_tsv posts | sort -rt "	" -k 3 > build/posts.tsv
 index_html build/posts.tsv hide-drafts > build/index.html
 index_html build/posts.tsv show-drafts > build/index-with-drafts.html
+index_gmi build/posts.tsv hide-drafts > build/index.gmi
 atom_xml build/posts.tsv > build/atom.xml
 while read -r f title created updated; do
 	write_page "$f" "$title" "$created" "$updated"
