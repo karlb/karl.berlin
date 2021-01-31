@@ -17,13 +17,13 @@ The resulting Gemini pages worked, but had two problems left:
 Both of these issues arise because md2gemini does not try to interpret HTML (which is allowed in Markdown documents). The easy fix was to replace the HTML markup before passing it to md2gemini with regular expressions:
 ```
 s/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g
-s/<!--.*-->//gs
+s/^<!--.*-->//gsm
 ```
 
 Combined with the call to md2gemini, this led to the following shell function to process Markdown to Gemtext.
 ```
 GEMINI() {
-	<"$1" perl -0pe 's/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g;s/<!--.*-->//gs' | md2gemini --links paragraph;
+	<"$1" perl -0pe 's/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g;s/^<!--.*-->//gsm' | md2gemini --links paragraph;
 }
 ```
 

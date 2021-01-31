@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 MARKDOWN=smu
-GEMINI() { <"$1" perl -0pe 's/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g;s/<!--.*-->//gs' | md2gemini --links paragraph; }
+GEMINI() { <"$1" perl -0pe 's/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g;s/^<!--.*-->//gsm' | md2gemini --links paragraph; }
 IFS='	'
 
 # Create tab separated file with filename, title, creation date, last update
