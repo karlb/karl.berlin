@@ -11,16 +11,19 @@ The Gemini protocol nicely matches my preference for simplicity, so I want to st
 I don't want to write each block post twice, so I'd like to convert the existing posts (written in Markdown) to Gemtext automatically. Fortunately, there's [md2gemini](https://github.com/makeworld-the-better-one/md2gemini), which can handle the conversion process. Since Gemtext does not support inline links, the links in my posts have to be moved out of the paragraphs into separate lines. md2gemini offers multiple ways to that. Putting the links at the end of each paragraph and numbering the references inside the paragraph (like this `[1]`) seemed like the most readable way to me, so I chose that one.
 
 The resulting Gemini pages worked, but had two problems left:
+
 * The comments I left for myself in some posts suddenly became visible
 * The HTML-links I use to include the `rel="me"` attribute on the index page were not converted
 
 Both of these issues arise because md2gemini does not try to interpret HTML (which is allowed in Markdown documents). The easy fix was to replace the HTML markup before passing it to md2gemini with regular expressions:
+
 ```
 s/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g
 s/^<!--.*-->//gsm
 ```
 
 Combined with the call to md2gemini, this led to the following shell function to process Markdown to Gemtext.
+
 ```
 GEMINI() {
 	<"$1" perl -0pe 's/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g;s/^<!--.*-->//gsm' | md2gemini --links paragraph;
@@ -53,6 +56,7 @@ index_gmi() {
 ```
 
 That's all that was necessary to create Gemtext pages for my blog. Right now, there are only two things I plan to improve in the future:
+
 * Add the [list of my projects](projects.html). That page is not a blog post and thus slightly special.
 * Keep links between blog pages consistent. Right now, they all link to the HTML version, even in the Gemini version.
 
@@ -63,6 +67,7 @@ Since Gemini doesn't use HTTP, I can't just copy the generated pages to my norma
 ### Choosing a Server
 
 There are plenty of Gemini servers. I chose [gmnisrv](https://git.sr.ht/~sircmpwn/gmnisrv) for the following reasons:
+
 * Few dependencies (written in plain C)
 * Automatic certificate handling (Gemini always uses TLS and thus needs certificates)
 * Support for virtual hosts, which will allow me to add more Gemini services on the same host in the future
@@ -82,6 +87,7 @@ root=/home/karl/hosts/karl.berlin/
 ```
 
 The Gemini server itself worked now, but it was not reachable from the outside, yet. The two missing steps were
+
 * Configure the DNS setting for gmi.karl.berlin.
 * Open the Gemini ports in the firewall: `sudo ufw allow 1965/tcp`
 
