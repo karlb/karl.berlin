@@ -1,29 +1,19 @@
 # Projects
 
 ## Active Projects
-<ul>
-    <li><a href="http://www.wikdict.com">WikDict.com</a>: Free bilingual dictionaries based on Wiktionary.org</li>
-    <li><a href="http://www.litespread.com">Litespread</a>: Adding a basic spreadsheet UI to SQLite, also nice for handling CSVs</li>
-    <li><a href="http://landrush.karl.berlin/">Land Rush</a>: Multi-player auction game</li>
-    <li><a href="http://karlb.github.io/nuclearchess/">Nuclear Chess</a>: Chess variant with AI, playable in the browser</li>
-    <li><a href="https://github.com/karlb/doagain">Do Again List</a>: An self sorting list of things you want to do somewhat regularly</li>
-    <li><a href="https://github.com/karlb/karl.berlin">blog.sh</a>: The minimalistic blog engine running this site</li>
-    <li><a href="https://github.com/karlb/smu">smu</a>: Sane, minimal markdown-like markup (fork)</li>
-</ul>
+* [WikDict.com](http://www.wikdict.com): Free bilingual dictionaries based on Wiktionary.org
+* [Litespread](http://www.litespread.com): Adding a basic spreadsheet UI to SQLite, also nice for handling CSVs
+* [Land Rush](http://landrush.karl.berlin/): Multi-player auction game
+* [Nuclear Chess](http://karlb.github.io/nuclearchess/): Chess variant with AI, playable in the browser
+* [Do Again List](https://github.com/karlb/doagain): An self sorting list of things you want to do somewhat regularly
+* [blog.sh](https://github.com/karlb/karl.berlin): The minimalistic blog engine running this site
+* [smu](https://github.com/karlb/smu): Sane, minimal markdown-like markup (fork)
 
 ## Old Projects
-<ul>
-    <li>
-        <a href="http://www.linux-games.com/">Lots of games</a>, some cross-platform games and some games for the obsolte Sharp Zaurus and Agenda VR3 mobile devices.
-    </li>
-    <li>
-        <a href="http://www.linux-games.com/sfont">SFont</a>, a very simple font library supporting fancy bitmap fonts (with colors and alpha channel) and basic kerning. Has been successfully used in dozens of projects by other people.
-    </li>
-</ul>
+* [Lots of games](http://www.linux-games.com/), some cross-platform games and some games for the obsolete Sharp Zaurus and Agenda VR3 mobile devices.
+* [SFont](http://www.linux-games.com/sfont), a very simple font library supporting fancy bitmap fonts (with colors and alpha channel) and basic kerning. Has been successfully used in dozens of projects by other people.
 
 ## Experiments
-<ul>
-    <li><a href="https://www.iprefer.to">iprefer.to</a>: Rating site that uses comparisons instead of star ratings</li>
-    <li><a href="https://github.com/karlb/zerosum">TrackMyOwe.com</a>: Track and settle owes online</li>
-    <li><a href="http://jsfiddle.net/karlb/PxfrJ/">TransDict</a>, a translation dictionary based on Wiktionary</li>
-</ul>
+* [iprefer.to](https://www.iprefer.to): Rating site that uses comparisons instead of star ratings
+* [TrackMyOwe.com](https://github.com/karlb/zerosum): Track and settle owes online
+* [TransDict](http://jsfiddle.net/karlb/PxfrJ/), a translation dictionary based on Wiktionary
