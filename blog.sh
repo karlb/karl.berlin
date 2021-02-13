@@ -104,6 +104,8 @@ index_gmi() {
 		created=$(echo "$created" | sed -E 's/T.*//')
 	 	echo "=> $link $created - $title"
 	done < "$1"
+
+	GEMINI pages/projects.md
 }
 
 rm -fr build && mkdir build
