@@ -1,4 +1,4 @@
-all:
+build:
 	./blog.sh
 
 clean:
@@ -9,7 +9,7 @@ watch:
 	ls -d .git/* * posts/* pages/* header.html | entr -cd make ;\
 	done
 
-deploy:
+deploy: build
 	rsync -avz --progress -e ssh build/ www.karl.berlin:hosts/karl.berlin
 
-.PHONY: all clean watch deploy
+.PHONY: build clean watch deploy
