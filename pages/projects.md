@@ -5,7 +5,7 @@
 * [Litespread](http://www.litespread.com): Adding a basic spreadsheet UI to SQLite, also nice for handling CSVs
 * [Land Rush](http://landrush.karl.berlin/): Multi-player auction game
 * [Nuclear Chess](http://karlb.github.io/nuclearchess/): Chess variant with AI, playable in the browser
-* [Do Again List](https://github.com/karlb/doagain): An self sorting list of things you want to do somewhat regularly
+* [Do Again List](https://github.com/karlb/doagain): A self sorting list of things you want to do somewhat regularly
 * [blog.sh](https://github.com/karlb/karl.berlin): The minimalistic blog engine running this site
 * [smu](https://github.com/karlb/smu): Sane, minimal markdown-like markup (fork)
 
@@ -17,3 +17,7 @@
 * [iprefer.to](https://www.iprefer.to): Rating site that uses comparisons instead of star ratings
 * [TrackMyOwe.com](https://github.com/karlb/zerosum): Track and settle owes online
 * [TransDict](http://jsfiddle.net/karlb/PxfrJ/), a translation dictionary based on Wiktionary
+
+## Reachable via Gemini Protocol
+* [gmi.karl.berlin](gemini://gmi.karl.berlin): This site
+* [gmi.WikDict.com](gemini://gmi.wikdict.com): Free bilingual dictionaries based on Wiktionary.org
