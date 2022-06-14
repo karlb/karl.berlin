@@ -7,6 +7,7 @@ This time, I only need a plain site without automatically updated timestamps or 
 ## Basic setup
 
 To get the site into a working state, I require the following functionality:
+
 * All input files reside in the `source` directory, in the same layout as I want them in the output.
 * During processing, add a header to all HTML files.
 * Copy all other files to the `build` directory as they are.
@@ -48,6 +49,7 @@ build/%.html: source/%.html header.html Makefile
 ### Generate Page From Markdown
 
 If you dislike writing HTML or if you have existing content in markdown format, you can pipe your markdown content through a markdown-to-HTML converter of you choice (I like [smu](https://github.com/karlb/smu)).
+
 ```make
 build/%.html: source/%.html header.html Makefile
 	@mkdir -p $(dir $@)
