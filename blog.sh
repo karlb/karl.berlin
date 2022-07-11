@@ -59,7 +59,7 @@ EOF
 	<entry>
 		<title>$title</title>
 		<content type="html">$content</content>
-		<link href="$f"/>
+		<link href="$(echo "$f" | sed -E 's|posts/(.*).md|\1.html|')"/>
 		<id>tag:$host,$day:$f</id>
 		<published>$created</published>
 		<updated>$updated</updated>
