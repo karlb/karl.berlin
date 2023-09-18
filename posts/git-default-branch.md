@@ -25,7 +25,7 @@ The command `remote show origin` provides all relevant information about the rem
 
 Fortunately there is a local representation of this information available via `git symbolic-ref refs/remotes/origin/HEAD`, but it may be out of date or unavailable (in which case you will see the error `fatal: ref refs/remotes/origin/HEAD is not a symbolic ref`). To update it, run `git remote set-head origin --auto`.
 
-## Implementing the `default-branch' Command
+## Implementing the `default-branch` Command
 
 Since I want to neither memorize nor type out these commands all the time, I package them up in two git aliases in my `.gitconfig`:
 
