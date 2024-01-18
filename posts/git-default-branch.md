@@ -2,9 +2,9 @@
 
 ## Why Do I Care About Default Branches?
 
-Typically, I develop on a feature branch, and when the feature is ready, there is an obvious branch into which I want to merge the branch. This branch is often called `master', `main' or `develop'. During development, I will occasionally rebase my feature branch on top of this branch, to reduce future merge conflicts, and to avoid falling behind on changes merged by other developers. I will call this branch the default branch from here on.
+Typically, I develop on a feature branch, and when the feature is ready, there is an obvious branch into which I want to merge the branch. This branch is often called `master`, `main` or `develop`. During development, I will occasionally rebase my feature branch on top of this branch, to reduce future merge conflicts, and to avoid falling behind on changes merged by other developers. I will call this branch the default branch from here on.
 
-To make common operations consistent across repositories, I want to use a `git default-branch' command that returns the name of the default branch, so that I can use commands like
+To make common operations consistent across repositories, I want to use a `git default-branch` command that returns the name of the default branch, so that I can use commands like
 
 ```
 # Rebase on latest version of the default branch
