@@ -14,7 +14,7 @@ See the [blog post](http://www.karl.berlin/blog.html) for more details. There's 
 * Clone this repository `git clone https://github.com/karlb/karl.berlin.git
 * It currently uses two external programs to generate the output formats
 	* HTML: [smu](https://github.com/karlb/smu), but you can replace it with any other markdown->HTML converter
-	* Gemtext: [https://github.com/karlb/md2gemini/], which you can comment out if you don't want to generate [Gemini](https://geminiquickst.art/) pages
+	* Gemtext: [md2gemini](https://github.com/karlb/md2gemini/), which you can comment out if you don't want to generate [Gemini](https://geminiquickst.art/) pages
 * Put your blog posts as markdown files into `posts`
 * Run `./blog.sh` and your posts will show up in `build/index-with-drafts.html`
 * Commit posts in git to add timestamps and have them show up in `build/index.html`
