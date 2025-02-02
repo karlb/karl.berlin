@@ -2,6 +2,7 @@
 set -eu
 MARKDOWN=smu
 GEMINI() { <"$1" perl -0pe 's/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g;s/^<!--.*-->//gsm' | md2gemini --links paragraph; }
+# GEMINI() { true; }  # Use this noop instead if you don't want Gemini protocol output
 IFS='	'
 
 # Create tab separated file with filename, title, creation date, last update
