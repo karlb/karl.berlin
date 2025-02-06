@@ -16,9 +16,8 @@
 
 ## Experiments
 * [Litespread](http://www.litespread.com): Adding a basic spreadsheet UI to SQLite, also nice for handling CSVs
-* [iprefer.to](https://www.iprefer.to): Rating site that uses comparisons instead of star ratings
+* [iprefer.to](https://github.com/karlb/iprefer): Rating site that uses comparisons instead of star ratings
 * [TrackMyOwe.com](https://github.com/karlb/zerosum): Track and settle owes online
-* [TransDict](http://jsfiddle.net/karlb/PxfrJ/), a translation dictionary based on Wiktionary
 
 ## Reachable via Gemini Protocol
 * [gmi.karl.berlin](gemini://gmi.karl.berlin): This site
