@@ -1,6 +1,7 @@
 # Stack Traces are Underrated
 
 ## I Love Stack Traces
+
 When something goes wrong in a program, many languages will spit out a stack trace with lots of useful information. Here's an example from one of my Python programs:
 
 ```
@@ -53,6 +54,7 @@ can't load data: failed to parse header: wrong number of elements
 ```
 
 While these prefixes resemble a poor man's stack trace, they
+
 * don't show the file and line number
 * don't show the code
 * can be ambiguous (the same error message or prefix could be used in multiple places in the source)
