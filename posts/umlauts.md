@@ -66,4 +66,6 @@ After restarting your desktop environment, you can select the keyboard layout an
 
 ## Alternatives
 
+Recent versions of xkeyboard-config include a ["de\_se\_fi" variant for the us layout](https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/blob/master/symbols/us#L2241-2262), that should give you the same results as my approach above.
+
 There's also the [AltGr-wEur](https://altgr-weur.eu/) keyboard layout, which fits the Danish, Dutch, Finnish, French, German, Italian, Norwegian, Portuguese, Spanish and Swedish characters all into a single keyboard layout without using dead keys. Combining all of these languages requires compromises, which results in the German ß not being on the S key but on number 8 key. If that's ok for you, this layout is a good choice.
