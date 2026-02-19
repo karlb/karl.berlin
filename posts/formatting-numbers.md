@@ -59,3 +59,27 @@ But rounding the big number can be confusing because it only has an accuracy of 
 ```
 
 This approach has worked well for me, but I have not seen it any other code bases. That makes me wonder: Did I miss any downsides? Are others doing the same and I just didn't notice? Or is there a better way to do the same? If you have the answer to one of these questions, please [let me know](mailto:karl@karl.berlin)!
+
+## Update (2026)
+
+It turns out that JavaScript's `Intl.NumberFormat` supports this formatting
+strategy since the [V3 proposal](https://github.com/tc39/proposal-intl-numberformat-v3)
+shipped in browsers. The ICU library that powers it calls the underlying concept
+"relaxed precision". You can get the same behavior as `fmt_min_sig` with:
+
+```js
+const fmt = new Intl.NumberFormat("en", {
+  minimumSignificantDigits: 3,
+  maximumSignificantDigits: 3,
+  maximumFractionDigits: 0,
+  roundingPriority: "morePrecision"
+});
+fmt.format(0.0123456)  // '0.0123'
+fmt.format(123456.78)  // '123,457'
+```
+
+The `morePrecision` mode resolves conflicts between the two rounding strategies
+by picking whichever produces more digits. For large numbers,
+`maximumFractionDigits: 0` wins (keeping all integer digits). For small numbers,
+`minimumSignificantDigits: 3` wins (keeping three significant figures). That is
+exactly the `max()` in `fmt_min_sig`.
