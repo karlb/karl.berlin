@@ -43,7 +43,7 @@ One way to reach this is to round to a fixed number of [significant figures](htt
 0.325
 ```
 
-But rounding the big number can be confusing because it only has an accuracy of three digits while showing eleven digits. My suggested solution is to format numbers with a *minimum* number of significant figures and to print all places before the decimal point for big numbers.
+But rounding the big number can be confusing because it only has an accuracy of three digits while showing eleven digits. My suggested solution is to format numbers with a _minimum_ number of significant figures and to print all places before the decimal point for big numbers.
 
 ```python
 >>> def fmt_min_sig(x, min_sig_figures=3):
