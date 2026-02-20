@@ -6,6 +6,7 @@
 * [smu](https://github.com/karlb/smu): Sane, minimal markdown-like markup (fork)
 * [dotfiles](https://github.com/karlb/dotfiles): Basic configuration I use across computers
 * [sqlean python package](https://github.com/karlb/sqlite-sqlean): Install SQLite extensions from PyPI
+* [calced](https://github.com/karlb/calced): Evaluate math inside plain text locally or on the web
 
 ## Old Projects
 * [Land Rush](http://landrush.karl.berlin/): Multi-player auction game
@@ -15,6 +16,7 @@
 * [SFont](http://www.linux-games.com/sfont), a very simple font library supporting fancy bitmap fonts (with colors and alpha channel) and basic kerning. Has been successfully used in dozens of projects by other people.
 
 ## Experiments
+* [TermStack](https://github.com/karlb/termstack): Mix CLI and GUI commands inside a terminal-like compositor
 * [Litespread](http://www.litespread.com): Adding a basic spreadsheet UI to SQLite, also nice for handling CSVs
 * [iprefer.to](https://github.com/karlb/iprefer): Rating site that uses comparisons instead of star ratings
 * [TrackMyOwe.com](https://github.com/karlb/zerosum): Track and settle owes online
