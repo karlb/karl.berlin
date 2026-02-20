@@ -1,6 +1,7 @@
 # Projects
 
 ## Active Projects
+
 * [WikDict.com](http://www.wikdict.com): Free bilingual dictionaries based on Wiktionary.org
 * [blog.sh](https://github.com/karlb/karl.berlin): The minimalistic blog engine running this site
 * [smu](https://github.com/karlb/smu): Sane, minimal markdown-like markup (fork)
@@ -9,6 +10,7 @@
 * [calced](https://github.com/karlb/calced): Evaluate math inside plain text locally or on the web
 
 ## Old Projects
+
 * [Land Rush](http://landrush.karl.berlin/): Multi-player auction game
 * [Nuclear Chess](http://karlb.github.io/nuclearchess/): Chess variant with AI, playable in the browser
 * [Do Again List](https://github.com/karlb/doagain): A self sorting list of things you want to do somewhat regularly
@@ -16,11 +18,13 @@
 * [SFont](http://www.linux-games.com/sfont), a very simple font library supporting fancy bitmap fonts (with colors and alpha channel) and basic kerning. Has been successfully used in dozens of projects by other people.
 
 ## Experiments
+
 * [TermStack](https://github.com/karlb/termstack): Mix CLI and GUI commands inside a terminal-like compositor
 * [Litespread](http://www.litespread.com): Adding a basic spreadsheet UI to SQLite, also nice for handling CSVs
 * [iprefer.to](https://github.com/karlb/iprefer): Rating site that uses comparisons instead of star ratings
 * [TrackMyOwe.com](https://github.com/karlb/zerosum): Track and settle owes online
 
 ## Reachable via Gemini Protocol
+
 * [gmi.karl.berlin](gemini://gmi.karl.berlin): This site
 * [gmi.WikDict.com](gemini://gmi.wikdict.com): Free bilingual dictionaries based on Wiktionary.org
