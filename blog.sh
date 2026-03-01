@@ -43,6 +43,7 @@ atom_xml() {
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<title>$(sed -n '/^# /{s/# //p; q}' index.md)</title>
 	<link href="${base}atom.xml" rel="self" />
+	<link href="$base" rel="alternate" />
 	<updated>$(date --iso=seconds)</updated>
 	<author>
 		<name>$(git config user.name)</name>
