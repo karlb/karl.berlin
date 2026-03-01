@@ -34,15 +34,15 @@ index_html() {
 }
 
 atom_xml() {
-	uri=$(sed -rn '/atom.xml/ s/.*href="([^"]*)".*/\1/ p' header.html)
-	host=$(echo "$uri" | sed -r 's|.*//([^/]+).*|\1|')
+	base=$(sed -rn '/atom.xml/ s/.*href="([^"]*)".*/\1/ p' header.html | sed 's|[^/]*$||')
+	host=$(echo "$base" | sed -r 's|.*//([^/]+).*|\1|')
 	first_commit_date=$(git log --pretty='format:%ai' . | cut -d ' ' -f1 | tail -1)
 
 	cat <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<title>$(sed -n '/^# /{s/# //p; q}' index.md)</title>
-	<link href="$uri" rel="self" />
+	<link href="${base}atom.xml" rel="self" />
 	<updated>$(date --iso=seconds)</updated>
 	<author>
 		<name>$(git config user.name)</name>
@@ -60,7 +60,7 @@ EOF
 	<entry>
 		<title>$title</title>
 		<content type="html">$content</content>
-		<link href="$(echo "$f" | sed -E 's|posts/(.*).md|\1.html|')"/>
+		<link href="${base}$(echo "$f" | sed -E 's|posts/(.*).md|\1.html|')"/>
 		<id>tag:$host,$day:$f</id>
 		<published>$created</published>
 		<updated>$updated</updated>
