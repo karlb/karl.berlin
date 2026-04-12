@@ -8,7 +8,8 @@ My goal is to get the German characters by holding right alt ("Alt Gr") while pr
 
 For the last years, I used the following `.Xmodmap` file, which could be applied by running `xmodmap .Xmodmap`:
 
-```keycode 108 = Mode_switch Alt_R
+```
+keycode 108 = Mode_switch Alt_R
 keycode 39 = s S ssharp
 keycode 38 = a A adiaeresis Adiaeresis
 keycode 30 = u U udiaeresis Udiaeresis
