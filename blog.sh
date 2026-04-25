@@ -1,16 +1,22 @@
 #!/bin/sh
 set -eu
-MARKDOWN=smu
-GEMINI() { <"$1" perl -0pe 's/<a href="([^"]*)".*>(.*)<\/a>/[\2](\1)/g;s/^<!--.*-->//gsm' | md2gemini --links paragraph; }
+
+HTML()   { cdjot "$1"; }
+# HTML()   { minipandoc -f djot -t html "$1"; }
+# HTML()   { pandoc -f djot -t html --syntax-highlighting=none "$1"; }
+#
+GEMINI() { pandoc -f djot -t gemtext.lua "$1"; }
+# GEMINI() { minipandoc -f djot -t gemtext.lua "$1"; }
 # GEMINI() { true; }  # Use this noop instead if you don't want Gemini protocol output
+
 IFS='	'
 
 # Create tab separated file with filename, title, creation date, last update
 index_tsv() {
-	for f in "$1"/*.md
+	for f in "$1"/*.dj
 	do
-		created=$(git log --pretty='format:%aI' "$f" 2> /dev/null | tail -1)
-		updated=$(git log --pretty='format:%aI' "$f" 2> /dev/null | head -1)
+		created=$(git log --follow --pretty='format:%aI' -- "$f" 2> /dev/null | tail -1)
+		updated=$(git log --follow --pretty='format:%aI' -- "$f" 2> /dev/null | head -1)
 		title=$(sed -n '/^# /{s/# //p; q}' "$f")
 		printf '%s\t%s\t%s\t%s\n' "$f" "${title:="No Title"}" "${created:="draft"}" "${updated:="draft"}"
 	done
@@ -18,16 +24,16 @@ index_tsv() {
 
 index_html() {
 	# Print header
-	title=$(sed -n '/^# /{s/# //p; q}' index.md)
+	title=$(sed -n '/^# /{s/# //p; q}' index.dj)
 	sed "s/{{TITLE}}/$title/" header.html
 
 	# Intro text
-	$MARKDOWN index.md
+	HTML index.dj
 
 	# Posts
 	while read -r f title created updated; do
 		if [ "$created" = "draft" ] && [ "$2" = "hide-drafts" ]; then continue; fi
-		link=$(echo "$f" | sed -E 's|.*/(.*).md|\1.html|')
+		link=$(echo "$f" | sed -E 's|.*/(.*).dj|\1.html|')
 		created=$(echo "$created" | sed -E 's/T.*//')
 	 	echo "$created &mdash; <a href=\"$link\">$title</a><br/>"
 	done < "$1"
@@ -41,7 +47,7 @@ atom_xml() {
 	cat <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-	<title>$(sed -n '/^# /{s/# //p; q}' index.md)</title>
+	<title>$(sed -n '/^# /{s/# //p; q}' index.dj)</title>
 	<link href="${base}atom.xml" rel="self" />
 	<link href="$base" rel="alternate" />
 	<updated>$(date --iso=seconds)</updated>
@@ -55,13 +61,13 @@ EOF
 		if [ "$created" = "draft" ]; then continue; fi
 
 		day=$(echo "$created" | sed 's/T.*//')
-		content=$($MARKDOWN "$f" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g')
+		content=$(HTML "$f" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g')
 
 		cat <<EOF
 	<entry>
 		<title>$title</title>
 		<content type="html">$content</content>
-		<link href="${base}$(echo "$f" | sed -E 's|posts/(.*).md|\1.html|')"/>
+		<link href="${base}$(echo "$f" | sed -E 's|posts/(.*).dj|\1.html|')"/>
 		<id>tag:$host,$day:$f</id>
 		<published>$created</published>
 		<updated>$updated</updated>
@@ -74,7 +80,7 @@ EOF
 
 write_page() {
 	filename=$1
-	target=$(echo "$filename" | sed -r 's|\w+/(.*).md|build/\1.html|')
+	target=$(echo "$filename" | sed -r 's|\w+/(.*).dj|build/\1.html|')
 	created=$(echo "$3" | sed 's/T.*//')
 	updated=$(echo "$4" | sed 's/T.*//')
 	dates_text="Written on ${created}."
@@ -83,7 +89,7 @@ write_page() {
 	fi
 	title=$2
 
-	$MARKDOWN "$filename" | \
+	HTML "$filename" | \
 		sed "$ a <small>$dates_text</small>" | \
 		cat header.html - |\
 		sed "s/{{TITLE}}/$title/" \
@@ -97,17 +103,17 @@ write_page() {
 
 index_gmi() {
 	# Intro text
-	GEMINI index.md
+	GEMINI index.dj
 
 	# Posts
 	while read -r f title created updated; do
 		if [ "$created" = "draft" ] && [ "$2" = "hide-drafts" ]; then continue; fi
-		link=$(echo "$f" | sed -E 's|.*/(.*).md|\1.gmi|')
+		link=$(echo "$f" | sed -E 's|.*/(.*).dj|\1.gmi|')
 		created=$(echo "$created" | sed -E 's/T.*//')
 	 	echo "=> $link $created - $title"
 	done < "$1"
 
-	GEMINI pages/projects.md
+	GEMINI pages/projects.dj
 }
 
 rm -fr build && mkdir build

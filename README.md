@@ -2,20 +2,19 @@
 
 `blog.sh` is a minimal blog engine in a small shell script. Features:
 
-* Requires only a posix shell, a markdown processor and git
+* Requires only a posix shell, a djot->HTML converter and git
 * Handle both blog posts and normal pages
-* No boilerplate, just create a markdown file
+* No boilerplate, just create a djot file
 * Show creation and update timestamps (taken from git history)
 
 See the [blog post](http://www.karl.berlin/blog.html) for more details. There's also [another post](https://www.karl.berlin/gemini-blog.html) about the [Gemini](https://geminiquickst.art/) support.
 
 ## Quickstart
 
-* Clone this repository `git clone https://github.com/karlb/karl.berlin.git
-* It currently uses two external programs to generate the output formats
-	* HTML: [smu](https://github.com/karlb/smu), but you can replace it with any other markdown->HTML converter
-	* Gemtext: [md2gemini](https://github.com/karlb/md2gemini/), which you can comment out if you don't want to generate [Gemini](https://geminiquickst.art/) pages
-* Put your blog posts as markdown files into `posts`
+* Clone this repository `git clone https://github.com/karlb/karl.berlin.git`
+* It uses [cdjot](https://github.com/karlb/cdjot/) to generate HTML from djot source, but pandoc also works fine
+* Comment out the `GEMINI` function if you don't want [Gemini](https://geminiquickst.art/) pages. If you do, use [pandoc](https://pandoc.org/) with the [gemtext.lua](https://github.com/karlb/gemtext.lua) custom writer;
+* Put your blog posts as [djot](https://djot.net/) files into `posts`
 * Run `./blog.sh` and your posts will show up in `build/index-with-drafts.html`
 * Commit posts in git to add timestamps and have them show up in `build/index.html`
 * Copy the content of `build` to your webserver, so that other people can read your blog
