@@ -1,0 +1,46 @@
+# I prefer Djot over Markdown
+
+## Why Djot?
+
+Markdown is very useful, widely adopted and at a first glance simple. But the simplicity falls apart when you look at edge cases, compatibility across applications and non-basic features. And despite the heroic effort of CommonMark, the fragmentation seems to grow with more dialects and extensions rather than consolidating. Even strict adherence to CommonMark would leave us with a spec that is large and hard to understand and implement due to the focus on codifying the markup as it was used, rather than prescribing something that is internally consistent.
+
+This is where [Djot](https://djot.net/) comes in, designed for conceptual clarity from the start. As we've learned in the ["Standards" xkcd](https://xkcd.com/927/), it won't replace the existing Markdown dialects, but it provides a sane alternative that I would like to see more widely adopted. In my opinion it is better suited than most other competitors:
+
+* It is created by [John MacFarlane](https://johnmacfarlane.net/), who is also behind CommonMark and pandoc. I can't imagine someone more suited to the task.
+* It is closer to Markdown than ReST, AsciiDoc, Org mode and most other alternatives.
+* It has enough features that few users will need to extend it or change it in other ways.
+* It has a clear spec, test cases and implementations across many languages.
+
+## What do I do about it?
+
+If I want others to use it, then I should start working with it myself. Here's what I've done so far:
+
+### Switched [my blog](https://github.com/karlb/karl.berlin) to use Djot
+
+I must admit that Markdown worked quite well for my blog, so this is more to get some experience with Djot and promote its usage rather than a big technical advantage. But I did notice some improvements due to the change:
+
+* The `<a rel="me">` links used to verify accounts on services like Mastodon no longer need inline HTML. Djot's attribute syntax lets me write `[Mastodon](url){rel=me}` directly, which also let me drop the perl preprocessing step that previously rewrote those `<a>` tags before piping into `md2gemini`.
+* Some errors in my [gemtext](https://geminiprotocol.net/docs/gemtext-specification.gmi) output were fixed by switching from the unmaintained [md2gemini](https://github.com/karlb/md2gemini) to my newly created [gemtext.lua](https://github.com/karlb/gemtext.lua), which I use along with [pandoc](https://pandoc.org/) to convert from Djot to gemtext. My [Gemini blog post](gemini-blog.html) already mentions two of them, plus one I missed back then.
+
+The conversion was small. The posts ended up at roughly the same length, with about 15 lines of syntax differences across all of them. The [toolchain switch](https://github.com/karlb/karl.berlin/commit/cc34708) was mostly trivial (renaming `.md` to `.dj`, swapping smu for cdjot). Only dropping the perl preprocessor from the `GEMINI()` function was a real simplification.
+
+Pandoc is a heavy dependency, but it is only required for the Gemini protocol output and I might replace it with something lightweight later (I did a [minipandoc experiment](https://github.com/karlb/minipandoc), but that's out of scope for this post). And pandoc is great.
+
+### Created [cdjot](https://github.com/karlb/cdjot), a Djot->HTML converter
+
+There was no C implementation to convert from Djot to HTML and I wanted to find out how hard it would be to create a simple dependency-free version in the style of a [suckless](https://suckless.org/) project. It turned out to be easy (with LLM help, which admittedly is not at all suckless-style) and resulted in a lightweight and [fast](https://github.com/dcampbell24/djot-implementations) converter. I like it enough that I'll probably maintain this instead of [smu](https://github.com/karlb/smu) and enjoy the benefits of a good spec and a more comprehensive test suite.
+
+### Upstreamed contributions
+
+I contributed [test cases](https://github.com/jgm/djot.js/pull/130) (maybe [more to come](https://github.com/jgm/djot.js/pull/137)) and a [footnote-reference fix](https://github.com/jgm/djot.js/pull/136) to djot.js. I added an [autolink rendering fix](https://github.com/jgm/djot.lua/pull/22) and a [CI fix](https://github.com/jgm/djot.lua/pull/23) to djot.lua, and a [heading auto-ID clarification suggestion](https://github.com/jgm/djot/issues/391) to the spec.
+
+None of these were big problems and I consider it a good sign that I could contribute these as someone new to the ecosystem. That shows both that it is easy enough to understand that I feel capable of doing it and that it is maintained well enough to get them accepted.
+
+## Why you might not like Djot
+
+* The spec has not reached 1.0 yet. The amount of change is roughly on the same level as for CommonMark, so I don't consider it a downside compared to that.
+* The syntax favors consistency and absence of edge cases over matching expectations. This is most apparent in the strict requirement of blank lines between block level elements (including different nesting levels of a list, which is the only part I really mind).
+
+## Try it yourself
+
+If you'd like to try Djot, start with the [syntax reference](https://htmlpreview.github.io/?https://github.com/jgm/djot/blob/master/doc/syntax.html) and the [quickstart for Markdown users](https://github.com/jgm/djot/blob/main/doc/quickstart-for-markdown-users.md), convert an existing Markdown file with [pandoc](https://pandoc.org/) (`pandoc -f markdown -t djot input.md -o output.dj`), or experiment in the [playground](https://djot.net/playground/).
