@@ -80,7 +80,7 @@ EOF
 
 write_page() {
 	filename=$1
-	target=$(echo "$filename" | sed -r 's|\w+/(.*).dj|build/\1.html|')
+	target=$(echo "$filename" | sed -r "s|\w+/(.*).dj|$OUT/\1.html|")
 	created=$(echo "$3" | sed 's/T.*//')
 	updated=$(echo "$4" | sed 's/T.*//')
 	dates_text="Written on ${created}."
@@ -116,23 +116,28 @@ index_gmi() {
 	GEMINI pages/projects.dj
 }
 
-rm -fr build && mkdir build
+OUT=$(mktemp -d ./build.XXXXXX)
+trap 'rm -fr "$OUT"' EXIT
 
 # Blog posts
-index_tsv posts | sort -rt "	" -k 3 > build/posts.tsv
-index_html build/posts.tsv hide-drafts > build/index.html
-index_html build/posts.tsv show-drafts > build/index-with-drafts.html
-index_gmi build/posts.tsv hide-drafts > build/index.gmi
-atom_xml build/posts.tsv > build/atom.xml
+index_tsv posts | sort -rt "	" -k 3 > "$OUT/posts.tsv"
+index_html "$OUT/posts.tsv" hide-drafts > "$OUT/index.html"
+index_html "$OUT/posts.tsv" show-drafts > "$OUT/index-with-drafts.html"
+index_gmi "$OUT/posts.tsv" hide-drafts > "$OUT/index.gmi"
+atom_xml "$OUT/posts.tsv" > "$OUT/atom.xml"
 while read -r f title created updated; do
 	write_page "$f" "$title" "$created" "$updated"
-done < build/posts.tsv
+done < "$OUT/posts.tsv"
 
 # Pages
-index_tsv pages > build/pages.tsv
+index_tsv pages > "$OUT/pages.tsv"
 while read -r f title created updated; do
 	write_page "$f" "$title" "$created" "$updated"
-done < build/pages.tsv
+done < "$OUT/pages.tsv"
 
 # Static files
-cp -r posts/*/ build
+cp -r posts/*/ "$OUT"
+
+# Atomic-ish swap
+rm -fr build
+mv "$OUT" build
