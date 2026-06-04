@@ -4,13 +4,16 @@
 
 * [WikDict.com](http://www.wikdict.com): Free bilingual dictionaries based on Wiktionary.org
 * [blog.sh](https://github.com/karlb/karl.berlin): The minimalistic blog engine running this site
-* [smu](https://github.com/karlb/smu): Sane, minimal markdown-like markup (fork)
-* [dotfiles](https://github.com/karlb/dotfiles): Basic configuration I use across computers
-* [sqlean python package](https://github.com/karlb/sqlite-sqlean): Install SQLite extensions from PyPI
 * [calced](https://github.com/karlb/calced): Evaluate math inside plain text locally or on the web
+* [cdjot](https://github.com/karlb/cdjot): Convert djot to HTML. Single-file C99, no deps
+* [gemtext.lua](https://github.com/karlb/gemtext.lua): A pandoc custom writer for gemtext (Gemini protocol markup)
+* [webdavfetcher.koplugin](https://github.com/karlb/webdavfetcher.koplugin): KOReader plugin that fetches files from a WebDAV server
+* [sqlean python package](https://github.com/karlb/sqlite-sqlean): Install SQLite extensions from PyPI
+* [dotfiles](https://github.com/karlb/dotfiles): Basic configuration I use across computers
 
 ## Old Projects
 
+* [smu](https://github.com/karlb/smu): Sane, minimal markdown-like markup (unmaintained fork)
 * [Land Rush](http://landrush.karl.berlin/): Multi-player auction game
 * [Nuclear Chess](http://karlb.github.io/nuclearchess/): Chess variant with AI, playable in the browser
 * [Do Again List](https://github.com/karlb/doagain): A self sorting list of things you want to do somewhat regularly
@@ -19,6 +22,7 @@
 
 ## Experiments
 
+* [minipandoc](https://github.com/karlb/minipandoc): Convert formats via pandoc Lua readers/writers without requiring pandoc
 * [TermStack](https://github.com/karlb/termstack): Mix CLI and GUI commands inside a terminal-like compositor
 * [Litespread](http://www.litespread.com): Adding a basic spreadsheet UI to SQLite, also nice for handling CSVs
 * [iprefer.to](https://github.com/karlb/iprefer): Rating site that uses comparisons instead of star ratings
