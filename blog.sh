@@ -117,6 +117,7 @@ index_gmi() {
 }
 
 OUT=$(mktemp -d ./build.XXXXXX)
+chmod 755 "$OUT"  # mktemp -d makes it 0700; nginx (nobody) needs to traverse it
 trap 'rm -fr "$OUT"' EXIT
 
 # Blog posts
